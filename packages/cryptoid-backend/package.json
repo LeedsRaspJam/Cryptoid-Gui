@@ -1,5 +1,5 @@
 {
-  "name": "cryptoid-gui",
+  "name": "cryptoid-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
