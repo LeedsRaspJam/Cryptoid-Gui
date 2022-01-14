@@ -3,12 +3,11 @@ import type { FrontendRequest } from "cryptoid-types";
 import { getCpuUsage } from "./data";
 import { sendWebsocketMessage } from "./websocket";
 // Creating a new websocket server
-const wss = new Server({ port: 8080 });
+const wss = new Server({ port: parseInt(process.env.port || String(8080)) });
 wss.on("connection", (ws) => {
   console.log("Websocket client connected");
   // sending message
   ws.on("message", async (data) => {
-    console.log(data.toString());
     let parsedData: FrontendRequest;
     try {
       parsedData = JSON.parse(data.toString());
