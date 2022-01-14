@@ -5,7 +5,7 @@ import { sendWebsocketMessage } from "./websocket";
 // Creating a new websocket server
 const wss = new Server({ port: 8080 });
 wss.on("connection", (ws) => {
-  console.log("new client connected");
+  console.log("Websocket client connected");
   // sending message
   ws.on("message", async (data) => {
     console.log(data.toString());
@@ -18,21 +18,14 @@ wss.on("connection", (ws) => {
     }
     switch (parsedData.requestType) {
       case "CPU_USAGE":
-        await sendWebsocketMessage(
-          ws,
-          "RESPONSE",
-          parsedData,
-          await getCpuUsage()
-        );
+        await sendWebsocketMessage(ws, parsedData, await getCpuUsage());
         break;
     }
   });
-  // handling what to do when clients disconnects from server
   ws.on("close", () => {
-    console.log("the client has disconnected");
+    console.log("Client disconnected");
   });
-  // handling client connection error
-  ws.onerror = function () {
-    console.log("Some Error occurred");
+  ws.onerror = function (err) {
+    console.log("An error occured: ", err);
   };
 });

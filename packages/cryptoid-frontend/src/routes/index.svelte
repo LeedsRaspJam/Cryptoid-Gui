@@ -4,15 +4,15 @@
 	import { onMount } from 'svelte';
 	let websocketMessage;
 	onMount(() => {
-		connect('ws://127.0.0.1:8080');
+		 connect('ws://127.0.0.1:8080');
 		websocketMessage = websocketMessages;
 	});
 </script>
 
 <body>
-	<p>Websocket</p>
-	<p>{$websocketMessage}</p>
-	<button on:click={getCpuUsage}>Get CPU</button>
-	<p>Total memory: {$cpuUsage?.totalMemory || 'N/A'}</p>
-	<p>Free memory: {$cpuUsage?.freeMemory || 'N/A'}</p>
+		<p>Websocket</p>
+		<p>{$websocketMessage}</p>
+		<button on:click={getCpuUsage}>Get CPU</button>
+		<p>CPU count: {$cpuUsage?.cpuCount || 'N/A'}</p>
+		<p>CPU usage: {$cpuUsage?.cpuUsage || 'N/A'}</p>
 </body>

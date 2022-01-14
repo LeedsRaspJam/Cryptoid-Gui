@@ -7,7 +7,7 @@ export async function connect(connectionUrl: string): Promise<void> {
 	if (!browser) return;
 	websocket = new WebSocket(connectionUrl);
 	websocket.onopen = () => {
-		console.log('Opened');
+		console.log('Websocket connection established');
 	};
 	websocket.onmessage = (message) => {
 		websocketMessages.set(message.data);
@@ -17,8 +17,8 @@ export async function connect(connectionUrl: string): Promise<void> {
 export function sendWebsocketMessage(
 	type: FrontendRequestType,
 	data?: string
-): Promise<Record<string, any>> {
-	return new Promise(function (resolve, reject) {
+): Promise<Record<string, unknown>> {
+	return new Promise(function (resolve) {
 		const requestId = generateUuid();
 		const websocketMessage: FrontendRequest = {
 			timestamp: Date.now(),
@@ -35,7 +35,7 @@ export function sendWebsocketMessage(
 			} catch {
 				// Hehe
 			}
-			if (parsedResponse?.data) {
+			if (parsedResponse?.requestId) {
 				console.log('Recieved request with request ID: ' + parsedResponse.requestId);
 				const recievedRequestId = parsedResponse.requestId;
 				if (recievedRequestId == requestId) {
