@@ -11,8 +11,13 @@
   "devDependencies": {
     "@types/node": "^17.0.8",
     "@types/ws": "^8.2.2",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
     "cryptoid-types": "workspace:^1.0.0",
-    "typescript": "^4.4.3"
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.4.1",
+    "typescript": "^4.5.4"
   },
   "dependencies": {
     "ws": "^8.4.0"
