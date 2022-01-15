@@ -19,6 +19,9 @@ export async function connect(connectionUrl: string): Promise<void> {
 	websocket.onclose = () => {
 		log('WARN', 'Websocket was closed');
 	};
+	websocket.onerror = (err) => {
+		log('ERROR', 'Websocket error: ' + err);
+	};
 }
 
 export function sendWebsocketMessage(

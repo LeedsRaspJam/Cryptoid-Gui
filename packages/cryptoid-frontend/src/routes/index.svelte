@@ -55,7 +55,6 @@
 		<p>CPU usage: {$cpuUsage?.cpuUsage || 'N/A'}</p>
 		<ToastContainer placement="bottom-right" let:data>
 			<FlatToast {data} />
-			<!-- Provider template for your toasts -->
 		</ToastContainer>
 	</div>
 </body>
