@@ -29,7 +29,8 @@
 					// @ts-expect-error
 					type: String(value.level).toLowerCase(),
 					theme: 'dark',
-					showProgress: true
+					showProgress: true,
+					component: BootstrapToast
 				});
 			}
 		});

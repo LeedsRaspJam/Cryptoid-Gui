@@ -13,13 +13,17 @@ export async function toggleDebug(): Promise<void> {
 	debug = !debug;
 }
 interface LogOptions {
-	consoleOnly: boolean;
+	logToConsole?: boolean;
+	logToUser?: boolean;
 }
 export async function log(level: LogLevel, message: string, options?: LogOptions): Promise<void> {
 	if (level == 'DEBUG' && !debug) return; // Don't log debug by default
-	console.log(`%c${level}` + '%c: ' + message, `color: ${colours[level]}`);
+	if (options?.logToConsole ?? true) {
+		console.log(`%c${level}` + '%c: ' + message, `color: ${colours[level]}`);
+	}
 	if (level == 'INFO' && process.env.NODE_ENV == 'production' && !debug) return;
-	if (options?.consoleOnly) return;
-	logStore.set({ level: level, message: message });
+	if (options?.logToUser ?? true) {
+		logStore.set({ level: level, message: message });
+	}
 }
 export const logStore = writable();

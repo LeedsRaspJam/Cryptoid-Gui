@@ -8,6 +8,7 @@ export async function connect(connectionUrl: string): Promise<void> {
 		websocket = new WebSocket(connectionUrl);
 	} catch (err) {
 		log('ERROR', 'Error connecting to websocket: ' + err);
+		websocket = null;
 		return;
 	}
 	websocket.onopen = () => {
@@ -20,7 +21,7 @@ export async function connect(connectionUrl: string): Promise<void> {
 		log('WARN', 'Websocket was closed');
 	};
 	websocket.onerror = (err) => {
-		log('ERROR', 'Websocket error: ' + err);
+		log('ERROR', 'Websocket error: ' + JSON.stringify(err));
 	};
 }
 
@@ -29,7 +30,13 @@ export function sendWebsocketMessage(
 	data?: string
 ): Promise<Record<string, unknown>> {
 	return new Promise(function (resolve, reject) {
-		if (!websocket) reject('Attempt to send websocket message before a connection was made');
+		if (!websocket || websocket.readyState != WebSocket.OPEN) {
+			log('ERROR', 'Attempt to send a websocket message whilst the websocket is closed', {
+				logToConsole: false
+			});
+			reject('Attempt to send a websocket message whilst the websocket is closed');
+		}
+
 		const requestId = generateUuid();
 		const websocketMessage: FrontendRequest = {
 			timestamp: Date.now(),
