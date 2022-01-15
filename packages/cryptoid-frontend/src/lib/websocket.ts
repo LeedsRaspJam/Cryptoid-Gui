@@ -1,16 +1,23 @@
-import { browser } from '$app/env';
 import { writable } from 'svelte/store';
 import { v4 as generateUuid } from 'uuid';
 import type { FrontendRequestType, FrontendRequest, BackendResponse } from 'cryptoid-types';
+import { log } from './log';
 let websocket: WebSocket;
 export async function connect(connectionUrl: string): Promise<void> {
-	if (!browser) return;
-	websocket = new WebSocket(connectionUrl);
+	try {
+		websocket = new WebSocket(connectionUrl);
+	} catch (err) {
+		log('ERROR', 'Error connecting to websocket: ' + err);
+		return;
+	}
 	websocket.onopen = () => {
-		console.log('Websocket connection established');
+		log('SUCCESS', 'Websocket connection established');
 	};
 	websocket.onmessage = (message) => {
 		websocketMessages.set(message.data);
+	};
+	websocket.onclose = () => {
+		log('WARN', 'Websocket was closed');
 	};
 }
 
@@ -18,7 +25,8 @@ export function sendWebsocketMessage(
 	type: FrontendRequestType,
 	data?: string
 ): Promise<Record<string, unknown>> {
-	return new Promise(function (resolve) {
+	return new Promise(function (resolve, reject) {
+		if (!websocket) reject('Attempt to send websocket message before a connection was made');
 		const requestId = generateUuid();
 		const websocketMessage: FrontendRequest = {
 			timestamp: Date.now(),
@@ -26,7 +34,7 @@ export function sendWebsocketMessage(
 			requestType: type,
 			data: data
 		};
-		console.log('Sending request with ID:' + requestId);
+		log('DEBUG', 'Sending request with ID:' + requestId);
 		websocket.send(JSON.stringify(websocketMessage));
 		const unsubscribe = websocketMessages.subscribe((value: string) => {
 			let parsedResponse: BackendResponse;
@@ -36,11 +44,11 @@ export function sendWebsocketMessage(
 				// Hehe
 			}
 			if (parsedResponse?.requestId) {
-				console.log('Recieved request with request ID: ' + parsedResponse.requestId);
 				const recievedRequestId = parsedResponse.requestId;
 				if (recievedRequestId == requestId) {
-					unsubscribe();
+					log('DEBUG', 'Recieved request with request ID: ' + parsedResponse.requestId);
 					resolve(JSON.parse(value));
+					unsubscribe();
 				}
 			}
 		});
