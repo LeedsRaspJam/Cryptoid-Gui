@@ -18,3 +18,8 @@ export async function getMemUsage(): Promise<void> {
 	const websocketResponse = await sendWebsocketMessage('MEM_USAGE');
 	memUsage.set(websocketResponse.data);
 }
+
+export async function enableMemTimer(): Promise<void> {
+	log('INFO', 'Enabling MEM timer');
+	setInterval(getMemUsage, 1000);
+}
