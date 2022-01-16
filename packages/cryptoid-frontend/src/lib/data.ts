@@ -3,6 +3,8 @@ import { log } from './log';
 import { sendWebsocketMessage } from './websocket';
 let cpuTimerEn = false;
 let memTimerEn = false;
+var cpuTimer;
+var memTimer;
 
 // @ts-expect-error Yes
 export const cpuUsage: CpuUsageResponse = writable();
@@ -22,7 +24,7 @@ export async function getMemUsage(): Promise<void> {
 export async function toggleCPUTimer(): Promise<void> {
 	if(cpuTimerEn == false) {
 		log('INFO', 'Enabling CPU timer');
-		var cpuTimer = setInterval(getCpuUsage, 2500);
+		cpuTimer = setInterval(getCpuUsage, 2500);
 		cpuTimerEn = true;
 	} else {
 		log('INFO', 'Disabling CPU timer');
@@ -34,7 +36,7 @@ export async function toggleCPUTimer(): Promise<void> {
 export async function toggleMemTimer(): Promise<void> {
 	if(memTimerEn == false) {
 		log('INFO', 'Enabling memory timer');
-		var memTimer = setInterval(getMemUsage, 250);
+		memTimer = setInterval(getMemUsage, 250);
 		memTimerEn = true;
 	} else {
 		log('INFO', 'Disabling memory timer');
