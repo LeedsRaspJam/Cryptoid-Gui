@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { connect, websocketMessages } from '../lib/websocket';
-	import { getCpuUsage, cpuUsage, getMemUsage, memUsage, enableMemTimer, enableCPUTimer} from '../lib/data';
+	import { cpuUsage, memUsage, toggleCPUTimer, toggleMemTimer } from '../lib/data';
 	import { browser } from '$app/env';
 	import { logStore } from '../lib/log';
 	import { onMount } from 'svelte';
@@ -52,10 +52,10 @@
 	</div>
 		<p>Websocket</p>
 		<p>{$websocketMessage}</p>
-		<button on:click={enableCPUTimer}>Get CPU</button>
+		<button on:click={toggleCPUTimer}>Toggle CPU</button>
 		<p>CPU count: {$cpuUsage?.cpuCount || 'N/A'}</p>
 		<p>CPU usage: {$cpuUsage?.cpuUsage || 'N/A'}</p>
-		<button on:click={enableMemTimer}>Get Mem</button>
+		<button on:click={toggleMemTimer}>Toggle Mem</button>
 		<p>Total mem: {$memUsage?.totalMem || 'N/A'}</p>
 		<p>Free mem: {$memUsage?.freeMem || 'N/A'}</p>
 		<p>Process mem: {$memUsage?.processMem || 'N/A'}</p>
