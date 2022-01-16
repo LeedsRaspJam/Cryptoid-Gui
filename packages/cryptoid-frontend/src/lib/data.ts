@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
 import { log } from './log';
 import { sendWebsocketMessage } from './websocket';
+let cpuTimerEn = false;
+let memTimerEn = false;
 
 // @ts-expect-error Yes
 export const cpuUsage: CpuUsageResponse = writable();
@@ -17,12 +19,23 @@ export async function getMemUsage(): Promise<void> {
 	memUsage.set(websocketResponse.data);
 }
 
-export async function enableCPUTimer(): Promise<void> {
-	log('INFO', 'Enabling CPU timer');
-	setInterval(getCpuUsage, 1000);
+export async function toggleCPUTimer(): Promise<void> {
+	log('INFO', 'Toggling CPU timer');
+	if(cpuTimerEn == false) {
+		var cpuTimer = setInterval(getCpuUsage, 2500);
+		cpuTimerEn = true;
+	} else {
+		clearInterval(cpuTimer);
+		cpuTimerEn = false;
 }
 
-export async function enableMemTimer(): Promise<void> {
-	log('INFO', 'Enabling memory timer');
-	setInterval(getMemUsage, 250);
+export async function toggleMemTimer(): Promise<void> {
+	log('INFO', 'Toggling memory timer');
+	if(memTimerEn == false) {
+		var memTimer = setInterval(getMemUsage, 250);
+		memTimerEn = true;
+	} else {
+		clearInterval(memTimer);
+		memTimerEn = false;
+	}
 }
