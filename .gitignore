@@ -133,3 +133,5 @@ dist
 # Mac stuff
 .DS_Store
 ._*
+
+version.txt
