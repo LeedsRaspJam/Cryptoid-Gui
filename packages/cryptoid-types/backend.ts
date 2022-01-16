@@ -14,3 +14,9 @@ export interface CpuUsageResponse {
   cpuCount: number;
   cpuUsage: number;
 }
+
+export interface MemUsageResponse {
+  freeMem: string;
+  totalMem: string;
+  processMem: string;
+}

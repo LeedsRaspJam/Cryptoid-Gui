@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { connect, websocketMessages } from '../lib/websocket';
-	import { getCpuUsage, cpuUsage } from '../lib/data';
+	import { getCpuUsage, cpuUsage, getMemUsage, memUsage} from '../lib/data';
 	import { browser } from '$app/env';
 	import { logStore } from '../lib/log';
 	import { onMount } from 'svelte';
@@ -54,6 +54,11 @@
 		<button on:click={getCpuUsage}>Get CPU</button>
 		<p>CPU count: {$cpuUsage?.cpuCount || 'N/A'}</p>
 		<p>CPU usage: {$cpuUsage?.cpuUsage || 'N/A'}</p>
+		<button on:click={getMemUsage}>Get Mem</button>
+		<p>Total mem: {$memUsage?.totalMem || 'N/A'}</p>
+		<p>Free mem: {$memUsage?.freeMem || 'N/A'}</p>
+		<p>Process mem: {$memUsage?.processMem || 'N/A'}</p>
+
 		<ToastContainer placement="bottom-right" let:data>
 			<FlatToast {data} />
 		</ToastContainer>
