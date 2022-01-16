@@ -1,6 +1,6 @@
 import { Server } from "ws";
 import type { FrontendRequest } from "cryptoid-types";
-import { getCpuUsage } from "./data";
+import { getCpuUsage, getMemUsage } from "./data";
 import { sendWebsocketMessage } from "./websocket";
 // Creating a new websocket server
 const wss = new Server({ port: parseInt(process.env.port || String(8080)) });
@@ -18,6 +18,9 @@ wss.on("connection", (ws) => {
     switch (parsedData.requestType) {
       case "CPU_USAGE":
         await sendWebsocketMessage(ws, parsedData, await getCpuUsage());
+        break;
+      case "MEM_USAGE":
+        await sendWebsocketMessage(ws, parsedData, await getMemUsage());
         break;
     }
   });
