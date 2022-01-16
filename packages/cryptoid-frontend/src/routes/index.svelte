@@ -7,6 +7,8 @@
 	import { toggleDebug } from '../lib/log';
 	import { toasts, ToastContainer, FlatToast, BootstrapToast } from 'svelte-toasts';
 	let debug = false
+	var memTimer = setInterval(getMemUsage, 1000);
+
 	function toggleDebuggy() {
 		toggleDebug()
 		// @ts-expect-error
