@@ -15,7 +15,7 @@
 	}
 	let websocketMessage;
 	if (browser) {
-		connect('ws://127.0.0.1:8080');
+		connect('ws://192.168.1.192:8080');
 		websocketMessage = websocketMessages;
 	}
 	onMount(() => {
