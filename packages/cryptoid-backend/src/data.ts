@@ -5,7 +5,7 @@ import { freemem, totalmem } from "os";
 
 export async function getCpuUsage(): Promise<CpuUsageResponse> {
   return {
-    cpuCount: cpu.count(),
+    cpuCount: 4,
     cpuUsage: await cpu.usage(),
   };
 }
