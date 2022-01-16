@@ -20,22 +20,24 @@ export async function getMemUsage(): Promise<void> {
 }
 
 export async function toggleCPUTimer(): Promise<void> {
-	log('INFO', 'Toggling CPU timer');
 	if(cpuTimerEn == false) {
+		log('INFO', 'Enabling CPU timer');
 		var cpuTimer = setInterval(getCpuUsage, 2500);
 		cpuTimerEn = true;
 	} else {
+		log('INFO', 'Disabling CPU timer');
 		clearInterval(cpuTimer);
 		cpuTimerEn = false;
 	}
 }
 
 export async function toggleMemTimer(): Promise<void> {
-	log('INFO', 'Toggling memory timer');
 	if(memTimerEn == false) {
+		log('INFO', 'Enabling memory timer');
 		var memTimer = setInterval(getMemUsage, 250);
 		memTimerEn = true;
 	} else {
+		log('INFO', 'Disabling memory timer');
 		clearInterval(memTimer);
 		memTimerEn = false;
 	}
