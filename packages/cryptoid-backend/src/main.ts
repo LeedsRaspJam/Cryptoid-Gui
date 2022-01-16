@@ -2,9 +2,9 @@ import { Server } from "ws";
 import type { FrontendRequest } from "cryptoid-types";
 import { getCpuUsage, getMemUsage } from "./data";
 import { sendWebsocketMessage } from "./websocket";
-import { SerialPort } from "serialport";
+import SerialPort from "serialport";
 
-const hcp = new SerialPort("/dev/ttyAMA0", baudRate=115200, parity=even);
+const hcp = new SerialPort("/dev/ttyAMA0", {baudRate: 115200, parity: "even"});
 
 // Creating a new websocket server
 const wss = new Server({ port: parseInt(process.env.port || String(8080)) });
