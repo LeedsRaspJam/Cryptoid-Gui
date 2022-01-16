@@ -6,7 +6,6 @@ import { sendWebsocketMessage } from './websocket';
 export const cpuUsage: CpuUsageResponse = writable();
 
 export async function getCpuUsage(): Promise<void> {
-	log('INFO', 'Requesting CPU usage');
 	const websocketResponse = await sendWebsocketMessage('CPU_USAGE');
 	cpuUsage.set(websocketResponse.data);
 }
@@ -14,12 +13,16 @@ export async function getCpuUsage(): Promise<void> {
 // @ts-expect-error Yes
 export const memUsage: MemUsageResponse = writable();
 export async function getMemUsage(): Promise<void> {
-	log('INFO', 'Requesting CPU usage');
 	const websocketResponse = await sendWebsocketMessage('MEM_USAGE');
 	memUsage.set(websocketResponse.data);
 }
 
+export async function enableCPUTimer(): Promise<void> {
+	log('INFO', 'Enabling CPU timer');
+	setInterval(getCpuUsage, 1000);
+}
+
 export async function enableMemTimer(): Promise<void> {
-	log('INFO', 'Enabling MEM timer');
-	setInterval(getMemUsage, 1000);
+	log('INFO', 'Enabling memory timer');
+	setInterval(getMemUsage, 250);
 }
