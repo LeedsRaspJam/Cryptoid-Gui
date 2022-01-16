@@ -27,6 +27,7 @@ export async function toggleCPUTimer(): Promise<void> {
 	} else {
 		clearInterval(cpuTimer);
 		cpuTimerEn = false;
+	}
 }
 
 export async function toggleMemTimer(): Promise<void> {
