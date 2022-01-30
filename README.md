@@ -3,7 +3,7 @@ The next version of [Cryptoid Gui](https://github.com/LeedsRaspJam/Cryptoid-Pyth
 
 ## Tools needed
 
-- [NodeJs](https://nodejs.org/en/) (Version 17)
+- [NodeJs](https://nodejs.org/en/) (Version 16 LTS)
 - [pnpm](https://pnpm.io/installation)
 
 ## Running
