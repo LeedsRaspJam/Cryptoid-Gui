@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 export interface RunEvalResponseData {
   message: string;
-  type: "success" | "warning" | "error";
+  type: "success" | "warning" | "error" | "info";
 }
 
 export default async function handler(

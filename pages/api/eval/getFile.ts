@@ -25,6 +25,6 @@ export default async function handler(
     const fileContents = await readFile(filePath, { encoding: "utf8" });
     res.status(200).json({ code: fileContents });
   } catch {
-    return res.status(503).json({ error: "Unknown  error opening file" });
+    return res.status(503).json({ error: "Unknown error opening file" });
   }
 }

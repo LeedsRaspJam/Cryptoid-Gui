@@ -17,7 +17,7 @@ export default async function handler(
   const filePath = joinPath(__dirname, "..", "..", "..", "..", "..", "storage", "evalFiles", body.filename);
   try {
     await writeFile(filePath, body.code, { encoding: "utf8" });
-    res.status(200).json({ message: "Wrote file", status: "success" });
+    res.status(200).json({ message: "Saved file", status: "success" });
   } catch {
     return res
       .status(503)

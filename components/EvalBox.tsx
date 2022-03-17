@@ -19,7 +19,7 @@ import type { ListFilesResponseData } from "../pages/api/eval/listFiles";
 const EvalBox: NextPage = () => {
   const [fileNameInput, setFileNameInput] = useState<string>();
   const [editorContent, setEditorContent] = useState<string>();
-  const [evalResponse, setEvalResponse] = useState<RunEvalResponseData>();
+  const [evalStatus, setEvalStatus] = useState<RunEvalResponseData>();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const { data: evalFileNames }: { data?: ListFilesResponseData } = useSWR(
     "api/eval/listFiles",
@@ -39,6 +39,8 @@ const EvalBox: NextPage = () => {
     if (response.status == 200) {
       const code = (await response.json()).code;
       setEditorContent(code);
+      setEvalStatus({ type: "info", message: "Loaded file" });
+      setSnackbarOpen(true);
     }
   }
   async function saveEvalCode() {
@@ -52,7 +54,7 @@ const EvalBox: NextPage = () => {
       method: "POST",
       body: JSON.stringify(postData),
     });
-    setEvalResponse(await response.json());
+    setEvalStatus(await response.json());
     setSnackbarOpen(true);
   }
   async function submitEval() {
@@ -65,7 +67,7 @@ const EvalBox: NextPage = () => {
       method: "POST",
       body: JSON.stringify(postData),
     });
-    setEvalResponse(await response.json());
+    setEvalStatus(await response.json());
     setSnackbarOpen(true);
   }
   return (
@@ -123,11 +125,11 @@ const EvalBox: NextPage = () => {
         onClose={closeSnackBar}
       >
         <Alert
-          severity={evalResponse?.type}
+          severity={evalStatus?.type}
           variant="filled"
           onClose={closeSnackBar}
         >
-          Eval: {evalResponse?.message}
+          Eval: {evalStatus?.message}
         </Alert>
       </Snackbar>
     </Box>
