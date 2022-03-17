@@ -4,9 +4,13 @@ import useSWR from "swr";
 import { fetcher } from "../lib/consts";
 import type { SystemInfoReturnData } from "../pages/api/systemInfo";
 const SystemInfo: NextPage = () => {
-  const { data, error } = useSWR("api/systemInfo", fetcher, {
-    refreshInterval: 5000,
-  });
+  const { data, error }: { data?: SystemInfoReturnData; error?: any } = useSWR(
+    "api/systemInfo",
+    fetcher,
+    {
+      refreshInterval: 5000,
+    }
+  );
   return (
     <Box>
       <Typography variant="h5">System Info</Typography>

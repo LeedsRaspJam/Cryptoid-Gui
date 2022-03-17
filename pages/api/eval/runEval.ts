@@ -7,7 +7,10 @@ export interface RunEvalResponseData {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<RunEvalResponseData>
+  res: NextApiResponse<RunEvalResponseData | string>
 ) {
-  res.status(200).send({ message: "Pew pew run", type: "success" });
+  if (req.method != "POST") return res.status(405).send("Method not allowed");
+  res
+    .status(200)
+    .json({ message: "Pew pew your code has been run", type: "warning" });
 }

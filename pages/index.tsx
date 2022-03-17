@@ -14,10 +14,10 @@ const Home: NextPage = () => {
           <Grid item>
             <SystemInfo />
           </Grid>
-          <Grid item>
-            <EvalBox />
-          </Grid>
         </Grid>
+        <Box>
+          <EvalBox />
+        </Box>
       </Paper>
     </Box>
   );
