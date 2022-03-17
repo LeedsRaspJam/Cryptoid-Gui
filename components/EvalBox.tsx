@@ -93,6 +93,7 @@ const EvalBox: NextPage = () => {
             onInputChange={(event, newInputValue) => {
               setFileNameInput(newInputValue);
             }}
+            freeSolo
           />
         </Grid>
         <Grid item>
