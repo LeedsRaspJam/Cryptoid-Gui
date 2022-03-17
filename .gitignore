@@ -16,7 +16,6 @@
 /build
 
 # misc
-.DS_Store
 *.pem
 
 # debug
@@ -33,6 +32,12 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# fun mac stuff
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
 
 # typescript
 *.tsbuildinfo
