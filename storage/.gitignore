@@ -1,2 +1,3 @@
 *.txt
 !demoFile.txt
+!demoFile2.txt
