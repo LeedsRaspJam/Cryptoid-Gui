@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@emotion/react': ^11.8.2
   '@emotion/styled': ^11.8.1
+  '@monaco-editor/react': ^4.3.1
   '@mui/icons-material': ^5.5.1
   '@mui/material': ^5.5.1
   '@types/node': 17.0.21
@@ -22,6 +23,7 @@ specifiers:
 dependencies:
   '@emotion/react': 11.8.2_00d6772dea80510e818fd171caaa025a
   '@emotion/styled': 11.8.1_19c9b884401318110e0b35fad34f7b03
+  '@monaco-editor/react': 4.3.1_react-dom@17.0.2+react@17.0.2
   '@mui/icons-material': 5.5.1_eaabad477ab592e6fc6c82ff11471ee4
   '@mui/material': 5.5.1_04cccb159326fc32d263f5d228230564
   next: 12.1.0_react-dom@17.0.2+react@17.0.2
@@ -252,6 +254,27 @@ packages:
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@monaco-editor/loader/1.2.0:
+    resolution: {integrity: sha512-cJVCG/T/KxXgzYnjKqyAgsKDbH9mGLjcXxN6AmwumBwa2rVFkwvGcUj1RJtD0ko4XqLqJxwqsN/Z/KURB5f1OQ==}
+    peerDependencies:
+      monaco-editor: '>= 0.21.0 < 1'
+    dependencies:
+      state-local: 1.0.7
+    dev: false
+
+  /@monaco-editor/react/4.3.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-f+0BK1PP/W5I50hHHmwf11+Ea92E5H1VZXs+wvKplWUWOfyMa1VVwqkJrXjRvbcqHL+XdIGYWhWNdi4McEvnZg==}
+    peerDependencies:
+      monaco-editor: '>= 0.25.0 < 1'
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@monaco-editor/loader': 1.2.0
+      prop-types: 15.8.1
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: false
 
   /@mui/base/5.0.0-alpha.72_f456dfc349ace84b0ea11d9e6e4ef3ab:
     resolution: {integrity: sha512-WCAooa9eqbsC68LhyKtDBRumH4hV1eRZ0A3SDKFHSwYG9fCOdsFv/H1dIYRJM0rwD45bMnuDiG3Qmx7YsTiptw==}
@@ -2080,6 +2103,10 @@ packages:
   /source-map/0.5.7:
     resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /state-local/1.0.7:
+    resolution: {integrity: sha512-HTEHMNieakEnoe33shBYcZ7NX83ACUjCu8c40iOGEZsngj9zRnkqS9j1pqQPXwobB0ZcVTk27REb7COQ0UR59w==}
     dev: false
 
   /string.prototype.matchall/4.0.6:
