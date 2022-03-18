@@ -1,4 +1,4 @@
-# Cryptoid Gui
+# Cryptoid GUI
 The next version of [Cryptoid Gui](https://github.com/LeedsRaspJam/Cryptoid-Python) written as a web application.
 
 ## Tools needed
