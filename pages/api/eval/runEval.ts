@@ -12,5 +12,5 @@ export default async function handler(
   if (req.method != "POST") return res.status(405).send("Method not allowed");
   res
     .status(200)
-    .json({ message: "Pew pew your code has been run", type: "warning" });
+    .json({ message: "Pew pew your code has been run", type: "success" });
 }
