@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const [version, setVersion] = useState<string>();
   useEffect(() => {
     async function run() {
-      if (process.env.NODE_ENV != "development") {
+      if (process.env.NODE_ENV == "development") {
         setVersion("DEV");
       } else {
         const response = await fetch("api/has-new-deploy");
