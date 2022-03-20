@@ -35,26 +35,18 @@ const Home: NextPage = () => {
           </Grid>
         </Box>
         <Group>
-          {version == "DEV" && (
-            <Text>
-              Build: <Code>{version}</Code>
-            </Text>
-          )}
-          {version != "DEV" && (
-            <Text>
-              Build:{" "}
-              <a
-                href={
-                  "https://github.com/LeedsRaspJam/Cryptoid-Gui/commit/" +
-                  version
-                }
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Code color="cyan">{version}</Code>
-              </a>
-            </Text>
-          )}
+          <Text>
+            Build:{" "}
+            <a
+              href={
+                "https://github.com/LeedsRaspJam/Cryptoid-Gui/commit/" + version
+              }
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Code color="cyan">{version}</Code>
+            </a>
+          </Text>
         </Group>
       </Container>
     </>
