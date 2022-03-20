@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Button } from "@mui/material";
+import { Button } from "@mantine/core";
 
 const ComControls: NextPage = () => {
   async function openComPort() {
@@ -8,7 +8,7 @@ const ComControls: NextPage = () => {
 
   return (
     <Button
-      variant="contained"
+      variant="filled"
       color="primary"
       type="submit"
       onClick={openComPort}

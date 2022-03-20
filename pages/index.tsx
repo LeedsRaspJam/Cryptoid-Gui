@@ -1,29 +1,25 @@
-import { Box, Typography, Grid, Paper } from "@mui/material";
 import type { NextPage } from "next";
+import { Box, Container, Grid, Paper } from "@mantine/core";
 import EvalBox from "../components/EvalBox";
 import SystemInfo from "../components/SystemInfo";
 import ComControls from "../components/ComControls";
 
 const Home: NextPage = () => {
   return (
-    <Box sx={{ m: 2 }}>
-      <Paper sx={{ height: "90vh", p: 2 }}>
-        <Typography variant="h4" sx={{ mb: 3 }}>
-          Cryptoid Gui
-        </Typography>
-        <Grid container spacing={2}>
-          <Grid item>
-            <SystemInfo />
-          </Grid>
-          <Grid item>
-            <ComControls />
-          </Grid>
-        </Grid>
-        <Box>
+    <Container size="lg">
+      <h2>Cryptoid Gui</h2>
+      <Grid gutter="md">
+        <Grid.Col span={5}>
+          <SystemInfo />
+        </Grid.Col>
+        <Grid.Col sx={{ maxWidth: 500 }} span={5}>
           <EvalBox />
-        </Box>
-      </Paper>
-    </Box>
+        </Grid.Col>
+        <Grid.Col span={5}>
+          <ComControls />
+        </Grid.Col>
+      </Grid>
+    </Container>
   );
 };
 

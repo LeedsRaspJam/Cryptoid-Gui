@@ -1,7 +1,5 @@
-import { createTheme } from "@mui/material/styles";
+import { MantineThemeOverride } from "@mantine/core";
 
-export const theme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+export const theme: MantineThemeOverride = {
+  colorScheme: "dark",
+};

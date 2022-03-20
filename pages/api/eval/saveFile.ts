@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { writeFile } from "fs/promises";
 import { join as joinPath } from "path";
 export interface SaveFileResponseData {
-  status: "success" | "fail";
-  message: string;
+  status: "success" | "error";
+  message?: string;
 }
 
 export default async function handler(
@@ -17,10 +17,10 @@ export default async function handler(
   const filePath = joinPath(__dirname, "..", "..", "..", "..", "..", "storage", "evalFiles", body.filename);
   try {
     await writeFile(filePath, body.code, { encoding: "utf8" });
-    res.status(200).json({ message: "Saved file", status: "success" });
+    res.status(200).json({ status: "success" });
   } catch {
     return res
       .status(503)
-      .json({ message: "Unknown error saving file", status: "fail" });
+      .json({ message: "Unknown error saving file", status: "error" });
   }
 }

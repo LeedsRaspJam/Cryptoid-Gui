@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
 import { NextPage } from "next";
 import useSWR from "swr";
+import { Box, Text } from "@mantine/core";
 import { fetcher } from "../lib/consts";
 import type { SystemInfoReturnData } from "../pages/api/systemInfo";
 const SystemInfo: NextPage = () => {
@@ -13,14 +13,12 @@ const SystemInfo: NextPage = () => {
   );
   return (
     <Box>
-      <Typography variant="h5">System Info</Typography>
-      <Typography>CPU Usage: {data?.cpu.usage ?? "Loading..."}</Typography>
-      <Typography variant="h6">Memory</Typography>
-      <Typography>
-        Process Used: {data?.memory.process ?? "Loading..."}
-      </Typography>
-      <Typography>Free: {data?.memory.free ?? "Loading..."}</Typography>
-      <Typography>Total: {data?.memory.total ?? "Loading..."}</Typography>
+      <h3>System Info</h3>
+      <Text>CPU Usage: {data?.cpu.usage ?? "Loading..."}</Text>
+      <h4>Memory</h4>
+      <Text>Process Used: {data?.memory.process ?? "Loading..."}</Text>
+      <Text>Free: {data?.memory.free ?? "Loading..."}</Text>
+      <Text>Total: {data?.memory.total ?? "Loading..."}</Text>
     </Box>
   );
 };
