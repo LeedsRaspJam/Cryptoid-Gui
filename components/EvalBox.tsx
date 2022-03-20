@@ -19,19 +19,32 @@ import { useNotifications } from "@mantine/notifications";
 import { SaveFileResponseData } from "../pages/api/eval/saveFile";
 import { RunEvalResponseData } from "../pages/api/eval/runEval";
 import { useModals } from "@mantine/modals";
+import { useForm } from "@mantine/form";
 const EvalBox: NextPage = () => {
-  const theme = useMantineTheme();
-  const [fileNameInput, setFileNameInput] = useState<string>();
   const [editorContent, setEditorContent] = useState<string>();
   const notifications = useNotifications();
   const modals = useModals();
+  const fileNameForm = useForm({
+    initialValues: {
+      filename: "",
+    },
+    validate: {
+      filename: (value) =>
+        /^(?!\.)(?!com[0-9]$)(?!con$)(?!lpt[0-9]$)(?!nul$)(?!prn$)[^\|*\?\\:<>/$"]*[^\.\|*\?\\:<>/$"]+$/.test(
+          value
+        )
+          ? null
+          : "Invalid filename",
+    },
+  });
   let confirmedOverwrite = false;
   const { data: evalFileNames }: { data?: ListFilesResponseData } = useSWR(
     "api/eval/listFiles",
     fetcher
   );
   async function loadEvalCode() {
-    if (!fileNameInput) return;
+    if (fileNameForm.validate().hasErrors) return;
+    const fileNameInput = fileNameForm.values.filename;
     const params = new URLSearchParams();
     params.append("filename", fileNameInput);
     const response = await fetch("api/eval/getFile?" + params);
@@ -43,9 +56,9 @@ const EvalBox: NextPage = () => {
           type: "success",
           title: "Eval",
           message: (
-            <text>
+            <Text>
               Successfully loaded <Code>{fileNameInput}</Code>
-            </text>
+            </Text>
           ),
         })
       );
@@ -55,16 +68,17 @@ const EvalBox: NextPage = () => {
           type: "error",
           title: "Eval",
           message: (
-            <text>
+            <Text>
               <Code>{fileNameInput}</Code> does not exist on disk
-            </text>
+            </Text>
           ),
         })
       );
     }
   }
   async function saveEvalCode() {
-    if (!fileNameInput) return;
+    if (fileNameForm.validate().hasErrors) return;
+    const fileNameInput = fileNameForm.values.filename;
     if (evalFileNames?.files.includes(fileNameInput) && !confirmedOverwrite) {
       modals.openConfirmModal({
         title: "Please confirm your action",
@@ -135,39 +149,39 @@ const EvalBox: NextPage = () => {
         theme={oneDarkTheme}
         onChange={setEditorContent}
       />
-      <Group spacing="xs">
-        <Autocomplete
-          id="evalFilenameInput"
-          data={evalFileNames?.files ?? []}
-          label="File Name"
-          onChange={setFileNameInput}
-        />
-        <Button
-          variant="light"
-          color="violet"
-          type="submit"
-          onClick={loadEvalCode}
-          sx={{ marginTop: 25 }}
-        >
-          Load Code
-        </Button>
-        <Button
-          variant="light"
-          color="violet"
-          onClick={saveEvalCode}
-          sx={{ marginTop: 25 }}
-        >
-          Save Code
-        </Button>
-        <Button
-          onClick={submitEval}
-          variant="filled"
-          color="green"
-          sx={{ marginTop: 25 }}
-        >
-          Run Eval
-        </Button>
-      </Group>
+      <form>
+        <Group spacing="xs">
+          <Autocomplete
+            data={evalFileNames?.files ?? []}
+            label="File Name"
+            {...fileNameForm.getInputProps("filename")}
+          />
+          <Button
+            variant="light"
+            color="violet"
+            onClick={loadEvalCode}
+            sx={{ marginTop: 25 }}
+          >
+            Load Code
+          </Button>
+          <Button
+            variant="light"
+            color="violet"
+            onClick={saveEvalCode}
+            sx={{ marginTop: 25 }}
+          >
+            Save Code
+          </Button>
+          <Button
+            onClick={submitEval}
+            variant="filled"
+            color="green"
+            sx={{ marginTop: 25 }}
+          >
+            Run Eval
+          </Button>
+        </Group>
+      </form>
     </Box>
   );
 };
