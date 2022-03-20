@@ -13,6 +13,7 @@
     "@codemirror/theme-one-dark": "^0.19.1",
     "@mantine/core": "^4.0.7",
     "@mantine/hooks": "^4.0.7",
+    "@mantine/modals": "^4.0.7",
     "@mantine/next": "^4.0.7",
     "@mantine/notifications": "^4.0.7",
     "@uiw/react-codemirror": "^4.5.1",

@@ -5,6 +5,7 @@ specifiers:
   '@codemirror/theme-one-dark': ^0.19.1
   '@mantine/core': ^4.0.7
   '@mantine/hooks': ^4.0.7
+  '@mantine/modals': ^4.0.7
   '@mantine/next': ^4.0.7
   '@mantine/notifications': ^4.0.7
   '@types/node': 17.0.21
@@ -28,6 +29,7 @@ dependencies:
   '@codemirror/theme-one-dark': 0.19.1
   '@mantine/core': 4.0.7_a734bb34b04da2b6d43c74e842f0d7c8
   '@mantine/hooks': 4.0.7_react@17.0.2
+  '@mantine/modals': 4.0.7_e66b0924798391f59fd2082566f98017
   '@mantine/next': 4.0.7_61de707ca5763d4f14eecf737d7843bb
   '@mantine/notifications': 4.0.7_e66b0924798391f59fd2082566f98017
   '@uiw/react-codemirror': 4.5.1_react-dom@17.0.2+react@17.0.2
@@ -662,6 +664,20 @@ packages:
       react: '>=16.8.0'
     dependencies:
       react: 17.0.2
+    dev: false
+
+  /@mantine/modals/4.0.7_e66b0924798391f59fd2082566f98017:
+    resolution: {integrity: sha512-+gn91uEnTtmLHjCtRzOeDUU2zx7jvpAWHDKBV8UKm91rTouuNaETp7aqvMPK6L9BQsYtektOd0Hhe1GkVTNeAw==}
+    peerDependencies:
+      '@mantine/core': 4.0.7
+      '@mantine/hooks': 4.0.7
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 4.0.7_a734bb34b04da2b6d43c74e842f0d7c8
+      '@mantine/hooks': 4.0.7_react@17.0.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
     dev: false
 
   /@mantine/next/4.0.7_61de707ca5763d4f14eecf737d7843bb:

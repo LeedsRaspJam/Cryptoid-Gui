@@ -1,27 +1,22 @@
 import type { NextPage } from "next";
 import CodeMirror from "@uiw/react-codemirror";
 import { oneDark as oneDarkTheme } from "@codemirror/theme-one-dark";
-import { useState, SyntheticEvent } from "react";
+import { useState } from "react";
 import { addStylingToNotification } from "../lib/notifications";
 import useSWR from "swr";
 import { fetcher } from "../lib/consts";
 import type { ListFilesResponseData } from "../pages/api/eval/listFiles";
-import {
-  Box,
-  Grid,
-  Autocomplete,
-  Button,
-  Alert,
-  Group,
-  Code,
-} from "@mantine/core";
+import { Box, Autocomplete, Button, Group, Code, Text } from "@mantine/core";
 import { useNotifications } from "@mantine/notifications";
 import { SaveFileResponseData } from "../pages/api/eval/saveFile";
 import { RunEvalResponseData } from "../pages/api/eval/runEval";
+import { useModals } from "@mantine/modals";
 const EvalBox: NextPage = () => {
   const [fileNameInput, setFileNameInput] = useState<string>();
   const [editorContent, setEditorContent] = useState<string>();
   const notifications = useNotifications();
+  const modals = useModals();
+  let confirmedOverwrite = false;
   const { data: evalFileNames }: { data?: ListFilesResponseData } = useSWR(
     "api/eval/listFiles",
     fetcher
@@ -49,6 +44,28 @@ const EvalBox: NextPage = () => {
   }
   async function saveEvalCode() {
     if (!fileNameInput) return;
+    if (evalFileNames?.files.includes(fileNameInput) && !confirmedOverwrite) {
+      modals.openConfirmModal({
+        title: "Please confirm your action",
+        children: (
+          <Text size="sm">
+            A file with this filename already exists, please confirm you want to
+            overwrite this file
+          </Text>
+        ),
+        labels: { confirm: "Confirm", cancel: "Cancel" },
+        onCancel: () => {
+          confirmedOverwrite = false;
+        },
+        onConfirm: () => {
+          confirmedOverwrite = true;
+          saveEvalCode();
+        },
+      });
+      return;
+    } else {
+      confirmedOverwrite = false;
+    }
     const currentEditorValue = editorContent;
     const postData = {
       code: currentEditorValue,
