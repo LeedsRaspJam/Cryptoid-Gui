@@ -12,6 +12,7 @@
     "@babel/core": "^7.17.8",
     "@codemirror/theme-one-dark": "^0.19.1",
     "@mantine/core": "^4.0.7",
+    "@mantine/form": "^4.0.7",
     "@mantine/hooks": "^4.0.7",
     "@mantine/modals": "^4.0.7",
     "@mantine/next": "^4.0.7",
@@ -34,5 +35,9 @@
     "eslint-config-prettier": "^8.5.0",
     "prettier": "2.6.0",
     "typescript": "4.6.2"
+  },
+  "volta": {
+    "node": "16.14.2",
+    "yarn": "1.22.18"
   }
 }
