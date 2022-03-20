@@ -40,6 +40,18 @@ const EvalBox: NextPage = () => {
           ),
         })
       );
+    } else {
+      notifications.showNotification(
+        addStylingToNotification({
+          type: "error",
+          title: "Eval",
+          message: (
+            <text>
+              <Code>{fileNameInput}</Code> does not exist on disk
+            </text>
+          ),
+        })
+      );
     }
   }
   async function saveEvalCode() {
@@ -54,9 +66,7 @@ const EvalBox: NextPage = () => {
           </Text>
         ),
         labels: { confirm: "Confirm", cancel: "Cancel" },
-        onCancel: () => {
-          confirmedOverwrite = false;
-        },
+        onCancel: () => {},
         onConfirm: () => {
           confirmedOverwrite = true;
           saveEvalCode();
