@@ -6,12 +6,21 @@ import { addStylingToNotification } from "../lib/notifications";
 import useSWR from "swr";
 import { fetcher } from "../lib/consts";
 import type { ListFilesResponseData } from "../pages/api/eval/listFiles";
-import { Box, Autocomplete, Button, Group, Code, Text } from "@mantine/core";
+import {
+  Box,
+  Autocomplete,
+  Button,
+  Group,
+  Code,
+  Text,
+  useMantineTheme,
+} from "@mantine/core";
 import { useNotifications } from "@mantine/notifications";
 import { SaveFileResponseData } from "../pages/api/eval/saveFile";
 import { RunEvalResponseData } from "../pages/api/eval/runEval";
 import { useModals } from "@mantine/modals";
 const EvalBox: NextPage = () => {
+  const theme = useMantineTheme();
   const [fileNameInput, setFileNameInput] = useState<string>();
   const [editorContent, setEditorContent] = useState<string>();
   const notifications = useNotifications();
@@ -119,33 +128,43 @@ const EvalBox: NextPage = () => {
   }
   return (
     <Box>
-      <h3>Eval</h3>
+      <h2>Eval</h2>
       <CodeMirror
         value={editorContent}
         height="200px"
         theme={oneDarkTheme}
         onChange={setEditorContent}
       />
-      <Group>
+      <Group spacing="xs">
         <Autocomplete
           id="evalFilenameInput"
           data={evalFileNames?.files ?? []}
-          sx={{ width: 200 }}
           label="File Name"
           onChange={setFileNameInput}
         />
         <Button
-          variant="filled"
-          color="secondary"
+          variant="light"
+          color="violet"
           type="submit"
           onClick={loadEvalCode}
+          sx={{ marginTop: 25 }}
         >
           Load Code
         </Button>
-        <Button variant="filled" color="secondary" onClick={saveEvalCode}>
+        <Button
+          variant="light"
+          color="violet"
+          onClick={saveEvalCode}
+          sx={{ marginTop: 25 }}
+        >
           Save Code
         </Button>
-        <Button onClick={submitEval} variant="filled">
+        <Button
+          onClick={submitEval}
+          variant="filled"
+          color="green"
+          sx={{ marginTop: 25 }}
+        >
           Run Eval
         </Button>
       </Group>

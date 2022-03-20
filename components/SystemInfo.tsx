@@ -13,9 +13,10 @@ const SystemInfo: NextPage = () => {
   );
   return (
     <Box>
-      <h3>System Info</h3>
+      <h2>System Info</h2>
+      <h3>CPU</h3>
       <Text>CPU Usage: {data?.cpu.usage ?? "Loading..."}</Text>
-      <h4>Memory</h4>
+      <h3>Memory</h3>
       <Text>Process Used: {data?.memory.process ?? "Loading..."}</Text>
       <Text>Free: {data?.memory.free ?? "Loading..."}</Text>
       <Text>Total: {data?.memory.total ?? "Loading..."}</Text>
